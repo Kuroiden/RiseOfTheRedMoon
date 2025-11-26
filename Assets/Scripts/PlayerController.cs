@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPun, IPunObservable
 {
+    private Rigidbody2D rb;
+    private Vector2 velocity;
+
     [Header("Game Objects")]
     CharacterController Player;
     [SerializeField] private GameObject PlayerObj;
@@ -21,9 +26,21 @@ public class PlayerController : MonoBehaviour
 
     public bool CanMove = true;
 
+    [Header("Photon PUN Variables")]
+    public int playerID;
+    private Vector3 net_Pos;
+    private Quaternion net_Rot;
+
     void Start()
     {
         Player = GetComponent<CharacterController>();
+
+        net_Pos = transform.position;
+        net_Rot = transform.rotation;
+
+        //playerID = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        playerID = 1;
     }
 
     void Update()
@@ -43,15 +60,47 @@ public class PlayerController : MonoBehaviour
 
         if (CanMove)
         {
-            // Update player position
-            Player.Move(updatePos * Time.deltaTime);            
+            //if (photonView.IsMine)
+            //{
+                // Update player position
+                Player.Move(updatePos * Time.deltaTime);
+
+                if (Input.GetMouseButton(0)) Attack();
+            //}
+            //else
+            //{
+            //    transform.position = Vector3.Lerp(transform.position, net_Pos, Time.deltaTime * 10f);
+            //    transform.rotation = Quaternion.Lerp(transform.rotation, net_Rot, Time.deltaTime);
+            //}
         }
 
-        // Updates player sprite based on movement
-        // Replace this if using Texture2DArray
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[0];
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[1];
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[2];
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[3];
+        //if (photonView.IsMine)
+        //{
+            // Updates player sprite based on movement
+            // Replace this if using Texture2DArray
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[0];
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[1];
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[2];
+            if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) PlayerObj.GetComponent<Renderer>().material.mainTexture = PlayerTexture[3];
+        //}
+    }
+
+    void Attack()
+    {
+
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            net_Pos = (Vector3)stream.ReceiveNext();
+            net_Rot = (Quaternion)stream.ReceiveNext();
+        }
     }
 }
