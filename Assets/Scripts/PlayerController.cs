@@ -39,8 +39,6 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         net_Rot = transform.rotation;
 
         //playerID = PhotonNetwork.LocalPlayer.ActorNumber;
-
-        playerID = 1;
     }
 
     void Update()

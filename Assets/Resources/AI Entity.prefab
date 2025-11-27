@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5442574876186997614}
   m_Layer: 0
   m_Name: AI Entity
-  m_TagString: Ally
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAlly: 0
   AllyPlayer: {fileID: 0}
+  DetectionLimit: 0
+  PlayerToAIDistanceLimit: 0
+  AttackRange: 0
 --- !u!195 &6747931486870368997
 NavMeshAgent:
   m_ObjectHideFlags: 0
