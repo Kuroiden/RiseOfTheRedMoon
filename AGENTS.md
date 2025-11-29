@@ -2,7 +2,7 @@
 - Project name: RiseOfTheRedMoon
 - Unity version: Unity 2022.3.47f1
 - Active game object:
-  - Name: Game Manager
+  - Name: UI
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

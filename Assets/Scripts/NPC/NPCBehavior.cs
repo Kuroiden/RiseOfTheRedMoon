@@ -1,282 +1,228 @@
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
 {
     private NPC_State npcState;
     private GameManager gameManager;
+    private NavMeshAgent nmAgent;
 
     [Header("AI Properties")]
-    NavMeshAgent NPC_Nav;
-    [SerializeField] private bool isAlly;
-    [SerializeField] private GameObject AllyPlayer;
-    private float DistanceFromPlayer;
+    [SerializeField] private bool _IsAlly;
+    public GameObject _AllyPlayer;
+    [Tooltip("Distance/Radius of detection area for AI to pursue opponent")]
+    public float _DetectionRange;
+    [Tooltip("Distance/Radius of AI attack area")]
+    public float _AttackRange;
+    public GameObject _Target;
 
-    [Tooltip("Limit of how far AI could be before entering Follow state")]
-    [SerializeField] private float MaxPlayerDistance;
-
-    [Tooltip("Limit of how far any entity should be for AI to exit Patrol state")]
-    [SerializeField] private float DetectionLimit;
-
-    [Tooltip("Limit of any player to AI distance before seeking closest entity regardless of priority")]
-    [SerializeField] private float PlayerAIRange;
-
-    [Tooltip("Limit of how close any entity should be for AI to enter Attack state")]
-    [SerializeField] private float AttackRange;
-
-    [Header("Entity Tracking")]
-    public List<GameObject> AllPlayers;
-    public List<GameObject> AllNPCs;
-
-    private GameObject closestPlayer;
-    private GameObject closestAI;
-
-    private float closestPlayer_Distance = 0f;
-    private float closestAI_Distance = 0f;
+    [Header("Enemy Tracking Variables")]
+    public List<GameObject> _Enemies;
+    public List<GameObject> _Opponents;
 
     [Header("Photon PUN Variables")]
     private Vector3 net_Pos;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        Debug.Log("Game Manager found");
-
-        NPC_Nav = GetComponent<NavMeshAgent>();
-
-        // Freeze NPC rotation
-        NPC_Nav.updateRotation = false;
-        NPC_Nav.angularSpeed = 0;
-
+        nmAgent = GetComponent<NavMeshAgent>();
         npcState = NPC_State.Passive;
 
-        // Sync position with Photon
-        net_Pos = transform.position;
-
-        // Get all entities based on tag
-        AllPlayers = GameObject.FindGameObjectsWithTag("Player").ToList();
-        AllNPCs = GameObject.FindGameObjectsWithTag("AI").ToList();
+        _IsAlly = false;
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        _Enemies = new List<GameObject>();
+        _Opponents = new List<GameObject>();
+    }
+
     void Update()
     {
-        UpdateNPCState();
-
-        if (isAlly)
+        if (!gameManager.isDaytime)
         {
-            if (AllPlayers.Contains(AllyPlayer)) AllPlayers.Remove(AllyPlayer);
-            foreach (GameObject npc in AllNPCs)
-            {
-                if (npc.GetComponent<NPCBehavior>().AllyPlayer == AllyPlayer) AllNPCs.Remove(npc);
-            }
+            _Enemies = get_AllPlayers();
+            _Opponents = get_AllAllies();
+
+            EnemyDetection();
         }
+
+        UpdateNPCState();
     }
 
-    private void UpdateNPCState()
+    protected void UpdateNPCState()
     {
-        // Freeze NPC rotation
-        this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        switch (npcState)
+        {
+            case NPC_State.Passive:
+                break;
 
-        if (!gameManager.isDaytime && !isAlly) npcState = NPC_State.Patrol;
-
-        switch (npcState) {
             case NPC_State.Follow:
-                NPC_Follow();
+                _NPC_Follow();
+
                 break;
 
             case NPC_State.Patrol:
-                NPC_Patrol();
                 break;
 
             case NPC_State.Chase:
-                NPC_Chase();
+                _NPC_Chase();
+
                 break;
 
             case NPC_State.Attack:
-                NPC_Attack();
+                _NPC_Attack();
+
+                break;
+
+            case NPC_State.Dead:
+                Destroy(this);
+
                 break;
         }
     }
 
-    private void MoveToTarget(Vector3 Target)
+    private void MoveToTarget(GameObject Target)
     {
-        NPC_Nav.SetDestination(Target);
-
-        // Change state to Attack when within attack range
-        if (npcState == NPC_State.Chase)
+        if (Target != null)
         {
-            if (Vector3.Distance(transform.position, Target) <= AttackRange)
-            {
-                npcState = NPC_State.Attack;
-            }
+            nmAgent.SetDestination(Target.transform.position);
         }
     }
 
-    private void NPC_Follow()
+    private void _NPC_Follow()
     {
-        Debug.Log($"Current NPC State: Follow");
-
-        if (!gameManager.isDaytime) 
-        {
-            List<GameObject> EnemyPlayers = DetectEnemyPlayer();
-            List<GameObject> EnemyAllies = DetectEnemyAlly();
-
-            if (DistanceFromPlayer < MaxPlayerDistance)
-            {
-                if (EnemyPlayers.Count > 0 || EnemyAllies.Count > 0) DetectNearbyEntity(EnemyPlayers, EnemyAllies);
-            }
-        }
-        
-        MoveToTarget(AllyPlayer.transform.position);
+        MoveToTarget(_AllyPlayer);
     }
 
-    private void NPC_Patrol()
+    private void _NPC_Chase()
     {
-        Debug.Log($"Current NPC State: Patrol");
+        MoveToTarget(_Target);
 
-        DetectNearbyEntity(DetectEnemyPlayer(), DetectEnemyAlly());
-    }
-
-    private void NPC_Chase()
-    {
-        Debug.Log($"Current NPC State: Chase");
-
-        Vector3 SetTarget = Vector3.zero;
-
-        // Checks if ally is too far from player
-        // If yes, return to player.
-        // If no, pursue closest enemy.
-        if (isAlly && DistanceFromPlayer > MaxPlayerDistance) npcState = NPC_State.Follow;
-        else
+        if (Vector3.Distance(_Target.transform.position, transform.position) <= _AttackRange)
         {
-            // Prioritizes enemy AI ally tracking if within distance limit from enemy player or distance between both are equal
-            if (Mathf.Abs(closestAI_Distance - closestPlayer_Distance) <= PlayerAIRange || Mathf.Abs(closestAI_Distance) == Mathf.Abs(closestPlayer_Distance)) SetTarget = closestAI.transform.position;
-            else if (Mathf.Abs(closestAI_Distance) > Mathf.Abs(closestPlayer_Distance) || closestPlayer == null) SetTarget = closestAI.transform.position;
-            else if (Mathf.Abs(closestAI_Distance) < Mathf.Abs(closestPlayer_Distance) || closestAI == null) SetTarget = closestPlayer.transform.position;
-            else npcState = NPC_State.Patrol;
-
-            MoveToTarget(SetTarget);
-        }
-       
-        
-    }
-
-    private void NPC_Attack()
-    {
-        Debug.Log($"Current NPC State: Attack.");
-        
-        // Temporary to test enemy and ally tracking
-        // Remove when adding attack conditions
-        if (isAlly && DistanceFromPlayer > MaxPlayerDistance)
-        {
-            npcState = NPC_State.Follow;
+            npcState = NPC_State.Attack;
         }
     }
 
-    private List<GameObject> DetectEnemyPlayer()
+    private void _NPC_Attack()
     {
-        List<GameObject> detectedPlayers = new List<GameObject>();
-
-        foreach (GameObject player in AllPlayers)
+        if (_Target != null)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) <= DetectionLimit) detectedPlayers.Add(player);
-            else
-            {
-                if (detectedPlayers.Count > 0 && detectedPlayers.Contains(player)) detectedPlayers.Remove(player);
-            }
+            Debug.Log($"{this.gameObject} is now attacking {_Target}");
         }
-
-        return detectedPlayers;
+        else npcState = NPC_State.Chase;
     }
 
-    private List<GameObject> DetectEnemyAlly()
+    private void _NPC_Roam()
     {
-        List<GameObject> detectedNPCs = new List<GameObject>();
 
-        foreach (GameObject npc in AllNPCs)
-        {
-            if (Vector3.Distance(transform.position, npc.transform.position) <= DetectionLimit) detectedNPCs.Add(npc);
-            else
-            {
-                if (detectedNPCs.Count > 0 && detectedNPCs.Contains(npc)) detectedNPCs.Remove(npc);
-            }
-        }
-
-        return detectedNPCs;
-    }
-
-    private void DetectNearbyEntity(List<GameObject> PlayersInRange, List<GameObject> NPCsInRange)
-    {
-        if (PlayersInRange.Count > 0 || NPCsInRange.Count > 0)
-        {
-            // Find the closest player entity
-            for (int i = 0; i < PlayersInRange.Count; i++)
-            {
-                float get_DistanceToSelf = Vector3.Distance(transform.position, PlayersInRange[i].transform.position);
-
-                if (closestPlayer_Distance == 0f || closestPlayer_Distance > get_DistanceToSelf)
-                {
-                    closestPlayer_Distance = get_DistanceToSelf;
-                    closestPlayer = PlayersInRange[i];
-
-                    Debug.Log($"{PlayersInRange[i]} detected");
-                }
-            }
-
-            // Find the closest AI entity
-            for (int i = 0; i < NPCsInRange.Count; i++)
-            {
-                float get_DistanceToSelf = Vector3.Distance(transform.position, NPCsInRange[i].transform.position);
-
-                if (closestAI_Distance == 0f || closestAI_Distance > get_DistanceToSelf)
-                {
-                    closestAI_Distance = get_DistanceToSelf;
-                    closestAI = NPCsInRange[i];
-
-                    Debug.Log($"{NPCsInRange[i]} detected");
-                }
-            }
-
-            if (!gameManager.isDaytime) npcState = NPC_State.Chase;
-
-        }
-        else
-        {
-            if (isAlly) npcState = NPC_State.Follow;
-            else
-            {
-                if (!gameManager.isDaytime)  npcState = NPC_State.Patrol;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (gameManager.isDaytime)
+        if (_IsAlly == false && _AllyPlayer == null)
         {
-            // Becomes player ally upon contact if it is not already an ally to any other player
-            if (AllyPlayer == null & other.CompareTag("Player"))
+            if (other.CompareTag("Player"))
             {
+                Debug.Log($"{other.gameObject} is now ally to {this}.");
+                _IsAlly = true;
+                _AllyPlayer = other.gameObject;
+
                 npcState = NPC_State.Follow;
-                isAlly = true;
-
-                AllyPlayer = other.GameObject();
-
-                Debug.Log($"NPC State Updated: {NPC_State.Follow}. NPC is ally to player ID {AllyPlayer.GetComponent<PlayerController>().playerID}");
-
-                // Track distance from ally player
-                DistanceFromPlayer = Vector3.Distance(transform.position, AllyPlayer.transform.position);
             }
         }
+    }
+
+    // AI Behaviors
+    private List<GameObject> get_AllPlayers()
+    {
+        Debug.Log("Searching for opposing players...");
+        List<GameObject> Players = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+        if (_IsAlly) Players.Remove(_AllyPlayer);
+
+        if (Players.Count > 0) Debug.Log("Opposing players found.");
+        else Debug.Log("ERROR: No opponents found. There might be only 1 player in the room.");
+
+        return Players;
+    }
+
+    private List<GameObject> get_AllAllies()
+    {
+        Debug.Log("Searching for opposing players allies...");
+        List<GameObject> Opponents = new List<GameObject>(GameObject.FindGameObjectsWithTag("AI"));
+        Opponents.Remove(this.gameObject);
+        if (_IsAlly)
+        {
+            Opponents.RemoveAll(o => o.gameObject.GetComponent<NPCBehavior>()._AllyPlayer == _AllyPlayer);
+        }
+
+        if (Opponents.Count > 0) Debug.Log("Opposing player allies found.");
+        else Debug.Log("ERROR: No opponent allies found.");
+
+        return Opponents;
+    }
+
+    private GameObject FindNearestEntity(List<GameObject> EntityList)
+    {
+        GameObject nearestEntity = null;
+        float entityDist = 0f;
+
+        for (int i = 0; i < EntityList.Count; i++)
+        {
+            float AllyToOppDist = Vector3.Distance(EntityList[i].transform.position, transform.position);
+
+            if (entityDist == 0 && nearestEntity == null) nearestEntity = EntityList[i];
+            else if (AllyToOppDist < entityDist) nearestEntity = EntityList[i];
+        }
+
+        return nearestEntity;
+    }
+
+    public NPC_State EnemyDetection()
+    {
+        Debug.Log("Searching for nearby enemy...");
+
+        if (_Target == null && npcState != NPC_State.Attack)
+        {
+            GameObject NearestPlayer = FindNearestEntity(_Enemies);
+            List<GameObject> Opponents = new List<GameObject>();
+
+            GameObject Target = null;
+
+            foreach (GameObject x in _Opponents)
+            {
+                if (x.GetComponent<NPCBehavior>()._AllyPlayer == NearestPlayer) Opponents.Add(x);
+            }
+
+            if (Opponents != null)
+            {
+                Target = FindNearestEntity(Opponents);
+            }
+            else
+            {
+                Target = NearestPlayer;
+            }
+
+            if (Target != null && Vector3.Distance(Target.transform.position, transform.position) <= _DetectionRange)
+            {
+                Debug.Log("Enemy detected. Switching state to Chase");
+
+                npcState = NPC_State.Chase;
+                _Target = Target;
+            }
+            else if (_IsAlly) npcState = NPC_State.Follow;
+            else npcState = NPC_State.Patrol;
+        }
+
+        return npcState;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
