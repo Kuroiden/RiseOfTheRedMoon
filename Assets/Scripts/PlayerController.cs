@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     CharacterController Player;
     [SerializeField] private GameObject PlayerObj;
     [SerializeField] private GameObject WolfObj;
+    [SerializeField] private GameObject BloodNado;
     public Texture[] PlayerTexture; // This can be replaced with a Texture2DArray I think, I just don't know how to use it
     public Texture[] WolfTexture; 
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         Player = GetComponent<CharacterController>();
         gManager = FindAnyObjectByType<GameManager>(); 
         PlayerObj.SetActive(true);
+        BloodNado.SetActive(false);
         net_Pos = transform.position;
         net_Rot = transform.rotation;
 
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
             if (gManager.isNighttime)
             {
                 pState = Player_State.Werewolf;
+                BloodNado.SetActive(true);
             }
             else
             {
@@ -124,6 +127,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         { 
             pState = Player_State.Werewolf; 
             PlayerObj.SetActive(false);
+            BloodNado.SetActive(true);
             WolfObj.SetActive(true);
         }
     }
