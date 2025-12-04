@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
+public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 {
     private NPC_State npcState;
     private GameManager gameManager;
@@ -21,6 +21,8 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
     [Tooltip("Distance/Radius of AI attack area")]
     public float _AttackRange;
     public GameObject _Target;
+    [SerializeField] private float npcMaxHealth = 50f;
+    [SerializeField] private float npcCurrentHealth;
 
     [Header("Enemy Tracking Variables")]
     public List<GameObject> _Enemies;
@@ -36,6 +38,8 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
         npcState = NPC_State.Passive;
 
         _IsAlly = false;
+
+        npcCurrentHealth = npcMaxHealth;
     }
 
     void Start()
@@ -83,7 +87,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
                 break;
 
             case NPC_State.Dead:
-                Destroy(this);
+                Die();
 
                 break;
         }
@@ -126,6 +130,40 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public void TakeDamage(float damage)
+    {
+        // The Master Client (or the owner of the object) should usually handle health reduction
+        // to prevent cheating and conflicts.
+        /*if (!PhotonNetwork.IsMasterClient)
+        {
+            return;
+        }*/
+
+        npcCurrentHealth -= damage;
+
+        Debug.Log($"{gameObject.name} took {damage} damage. Remaining health: {npcCurrentHealth}");
+
+        if (npcCurrentHealth <= 0)
+        {
+            npcState = NPC_State.Dead;
+        }
+    }
+    private void Die()
+    {
+        if (npcCurrentHealth == 0)
+        {
+            Debug.Log(gameObject.name + " has died.");
+
+            Destroy(this);
+
+            /*
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            */
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (_IsAlly == false && _AllyPlayer == null)

@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void StartDaylightTimer()
     {
-        // Only master client decides when to start
+       
         if (PhotonNetwork.IsMasterClient && !isDaytime)
         {
             photonView.RPC("RPC_StartDaylightTimer", RpcTarget.AllBuffered, PhotonNetwork.Time);
@@ -88,7 +88,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         isNighttime = isNight;
         isDaytime = !isNight;
 
-        // Set lights for all clients (assuming lights are synchronized GameObjects)
         Dlight.SetActive(isDaytime);
         Nlight.SetActive(isNighttime);
 
