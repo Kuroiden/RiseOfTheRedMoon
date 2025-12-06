@@ -4,11 +4,15 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Security.Cryptography.X509Certificates;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [Header("Session Variables")]
     public bool isDaytime;
+    public GameObject Dlight;
+    public bool isNighttime;
+    public GameObject Nlight    ;
     [SerializeField] private float daytimeDuration;
     private float daytimeTimer;
 
@@ -22,8 +26,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        Dlight.SetActive(true);
         daytimeTimer = daytimeDuration;
         isDaytime = true;
+        isNighttime = false;
     }
 
     // Update is called once per frame
@@ -37,6 +43,16 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 daytimeTimer = 0;
                 isDaytime = false;
+                isNighttime = true;
+                Dlight.SetActive(false);
+                Nlight.SetActive(true);
+
+
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    photonView.RPC("RPC_ChangeDayNightState", RpcTarget.AllBuffered, isNighttime);
+                }
+
             }
 
             // Update UI timer
@@ -51,7 +67,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void StartDaylightTimer()
     {
-        // Only master client decides when to start
+       
         if (PhotonNetwork.IsMasterClient && !isDaytime)
         {
             photonView.RPC("RPC_StartDaylightTimer", RpcTarget.AllBuffered, PhotonNetwork.Time);
@@ -64,6 +80,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         daytimeTimer = daytimeDuration;
         isDaytime = true;
         Debug.Log("Photon PUN timer started!");
+    }
+
+    [PunRPC]
+    void RPC_ChangeDayNightState(bool isNight)
+    {
+        isNighttime = isNight;
+        isDaytime = !isNight;
+
+        Dlight.SetActive(isDaytime);
+        Nlight.SetActive(isNighttime);
+
     }
 
     void UpdateTimerUI()
