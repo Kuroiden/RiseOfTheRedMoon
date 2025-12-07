@@ -48,6 +48,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30120ac3368fc1e4896139c27386cb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcObject: {fileID: 0}
+  WolfSprites:
+  - {fileID: 2800000, guid: 1f03cca57a4be2748acd63e5c5568cd8, type: 3}
+  - {fileID: 2800000, guid: 8bcb4fcf00271c841a923a7715c34e30, type: 3}
+  - {fileID: 2800000, guid: 7300ca1694a5ff341871150eec7d13ee, type: 3}
+  - {fileID: 2800000, guid: 44d5517dbd2ac1042abc7eb1a5a31ebb, type: 3}
+  _IsAlly: 0
+  _AllyPlayer: {fileID: 0}
+  _DetectionRange: 0
+  _AttackRange: 0
+  _Target: {fileID: 0}
+  npcMaxHealth: 50
+  npcCurrentHealth: 0
+  _isAttacking: 0
+  atk: 0
+  atk_cooldown_duration: 0
+  _Enemies: []
+  _Opponents: []
+  Targets: []
 --- !u!195 &6747931486870368997
 NavMeshAgent:
   m_ObjectHideFlags: 0
