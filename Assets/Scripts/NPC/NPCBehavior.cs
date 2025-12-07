@@ -14,6 +14,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     private GameManager gameManager;
     private NavMeshAgent nmAgent;
     [SerializeField] private GameObject npcObject;
+    [SerializeField] private GameObject atkVFX;
 
     [Header("AI Properties")]
     public Texture[] WolfSprites; 
@@ -29,8 +30,8 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     public float npcCurrentHealth;
     [SerializeField] private bool _isAttacking;
     [SerializeField] private int atk;
-    [SerializeField] private float atk_cooldown_duration;
-    private float atk_cooldown;
+    [SerializeField] private float atkCooldownDuration;
+    private float atkCooldown;
 
     [Header("Enemy Tracking Variables")]
     public List<GameObject> _Enemies;
@@ -57,7 +58,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         _Enemies = new List<GameObject>();
         _Opponents = new List<GameObject>();
         Targets = new List<GameObject>();
-        atk_cooldown = atk_cooldown_duration;
+        atkCooldown = atkCooldownDuration;
     }
 
     void Update()
@@ -153,11 +154,13 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 
             if (_isAttacking)
             {
-                atk_cooldown -= Time.deltaTime;
-                if (atk_cooldown <= 0)
+                atkVFX.SetActive(true);
+
+                atkCooldown -= Time.deltaTime;
+                if (atkCooldown <= 0)
                 {
                     _isAttacking = false;
-                    atk_cooldown = atk_cooldown_duration;
+                    atkCooldown = atkCooldownDuration;
                 }
             }
             else 
@@ -168,6 +171,8 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 
                     if (_Target.CompareTag("AI")) _Target.GetComponent<NPCBehavior>().TakeDamage(atk);
                     else _Target.GetComponent<PlayerController>().IsAttacked(atk);
+
+                    
                 }
                 else
                 {

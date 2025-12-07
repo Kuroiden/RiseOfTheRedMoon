@@ -26736,6 +26736,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7f68575037463ac459d80ad05baf5eab, type: 2}
+    - target: {fileID: 4925188293488010453, guid: 47675e87459d23248bd4d7864c696b54, type: 3}
+      propertyPath: gManager
+      value: 
+      objectReference: {fileID: 1029616523}
     - target: {fileID: 7476947664310821290, guid: 47675e87459d23248bd4d7864c696b54, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -27019,14 +27023,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 270401804449314007, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 270401804449314007, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 1029616523}
     - target: {fileID: 1572197870069932734, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.52
@@ -27070,10 +27066,6 @@ PrefabInstance:
     - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
       propertyPath: m_Name
       value: Entity
-      objectReference: {fileID: 0}
-    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
