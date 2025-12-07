@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e45b159175661774eb0af9f7a402a44b, type: 2}
+  - {fileID: 2100000, guid: d98eeea3e33d0c540ac6b375f1f642ad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,14 +130,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30120ac3368fc1e4896139c27386cb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  npcObject: {fileID: 2968924987911495764}
+  WolfSprites:
+  - {fileID: 2800000, guid: 1f03cca57a4be2748acd63e5c5568cd8, type: 3}
+  - {fileID: 2800000, guid: 44d5517dbd2ac1042abc7eb1a5a31ebb, type: 3}
+  - {fileID: 2800000, guid: 8bcb4fcf00271c841a923a7715c34e30, type: 3}
+  - {fileID: 2800000, guid: 7300ca1694a5ff341871150eec7d13ee, type: 3}
   _IsAlly: 0
   _AllyPlayer: {fileID: 0}
   _DetectionRange: 3
   _AttackRange: 1.5
   _Target: {fileID: 0}
+  npcMaxHealth: 50
+  npcCurrentHealth: 0
+  _isAttacking: 0
+  atk: 5
+  atk_cooldown_duration: 2
   _Enemies: []
   _Opponents: []
+  Targets: []
 --- !u!195 &3825434524495026528
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -148,7 +159,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.225
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 0

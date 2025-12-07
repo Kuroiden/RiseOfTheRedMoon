@@ -6,14 +6,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 {
     private NPC_State npcState;
     private GameManager gameManager;
     private NavMeshAgent nmAgent;
+    [SerializeField] private GameObject npcObject;
 
     [Header("AI Properties")]
+    public Texture[] WolfSprites; 
+    private bool isFacingLeft;
     [SerializeField] private bool _IsAlly;
     public GameObject _AllyPlayer;
     [Tooltip("Distance/Radius of detection area for AI to pursue opponent")]
@@ -22,11 +26,16 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     public float _AttackRange;
     public GameObject _Target;
     [SerializeField] private float npcMaxHealth = 50f;
-    [SerializeField] private float npcCurrentHealth;
+    public float npcCurrentHealth;
+    [SerializeField] private bool _isAttacking;
+    [SerializeField] private int atk;
+    [SerializeField] private float atk_cooldown_duration;
+    private float atk_cooldown;
 
     [Header("Enemy Tracking Variables")]
     public List<GameObject> _Enemies;
     public List<GameObject> _Opponents;
+    public List<GameObject> Targets;
 
     [Header("Photon PUN Variables")]
     private Vector3 net_Pos;
@@ -36,6 +45,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         nmAgent = GetComponent<NavMeshAgent>();
         npcState = NPC_State.Passive;
+        isFacingLeft = false;
 
         _IsAlly = false;
 
@@ -46,19 +56,22 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     {
         _Enemies = new List<GameObject>();
         _Opponents = new List<GameObject>();
+        Targets = new List<GameObject>();
+        atk_cooldown = atk_cooldown_duration;
     }
 
     void Update()
     {
-        if (!gameManager.isDaytime)
+        if (gameManager.isNighttime)
         {
-            _Enemies = get_AllPlayers();
-            _Opponents = get_AllAllies();
+            if (_Enemies.Count == 0) _Enemies = get_AllPlayers();
+            if (_Opponents.Count == 0) _Opponents = get_AllAllies();
 
             EnemyDetection();
         }
 
         UpdateNPCState();
+        UpdateSprite();
     }
 
     protected void UpdateNPCState()
@@ -93,6 +106,17 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         }
     }
 
+    private void UpdateSprite()
+    {
+        if (nmAgent.desiredVelocity.x > 0) isFacingLeft = false;
+        if (nmAgent.desiredVelocity.x < 0) isFacingLeft = true;
+
+        if (isFacingLeft)
+            npcObject.GetComponent<Renderer>().material.mainTexture = (npcState == NPC_State.Attack) ? WolfSprites[1] : WolfSprites[3];
+        else
+            npcObject.GetComponent<Renderer>().material.mainTexture = (npcState == NPC_State.Attack) ? WolfSprites[0] : WolfSprites[2];
+    }
+
     private void MoveToTarget(GameObject Target)
     {
         if (Target != null)
@@ -120,9 +144,47 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     {
         if (_Target != null)
         {
+            float enemyhp;
+
+            if (_Target.CompareTag("AI")) enemyhp = _Target.GetComponent<NPCBehavior>().npcCurrentHealth;
+            else enemyhp = _Target.GetComponent<PlayerController>().playerCurrentHealth;
+
             Debug.Log($"{this.gameObject} is now attacking {_Target}");
+
+            if (_isAttacking)
+            {
+                atk_cooldown -= Time.deltaTime;
+                if (atk_cooldown <= 0)
+                {
+                    _isAttacking = false;
+                    atk_cooldown = atk_cooldown_duration;
+                }
+            }
+            else 
+            {
+                if (enemyhp > 0)
+                {
+                    _isAttacking = true;
+
+                    if (_Target.CompareTag("AI")) _Target.GetComponent<NPCBehavior>().TakeDamage(atk);
+                    else _Target.GetComponent<PlayerController>().IsAttacked(atk);
+                }
+                else
+                {
+                    if (_Target.CompareTag("AI")) _Opponents.Remove(_Target);
+                    else _Enemies.Remove(_Target);
+
+                    Targets.Remove(_Target);
+
+                    _Target = null;
+                }
+            }
         }
-        else npcState = NPC_State.Chase;
+        else
+        {
+            if (_IsAlly) npcState = NPC_State.Follow;
+            else npcState = NPC_State.Patrol;
+        }
     }
 
     private void _NPC_Roam()
@@ -154,7 +216,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         {
             Debug.Log(gameObject.name + " has died.");
 
-            Destroy(this);
+            this.gameObject.SetActive(false);
 
             /*
             if (photonView.IsMine)
@@ -166,15 +228,18 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (_IsAlly == false && _AllyPlayer == null)
+        if (gameManager.isDaytime)
         {
-            if (other.CompareTag("Player"))
+            if (_IsAlly == false && _AllyPlayer == null)
             {
-                Debug.Log($"{other.gameObject} is now ally to {this}.");
-                _IsAlly = true;
-                _AllyPlayer = other.gameObject;
+                if (other.CompareTag("Player"))
+                {
+                    Debug.Log($"{other.gameObject} is now ally to {this}.");
+                    _IsAlly = true;
+                    _AllyPlayer = other.gameObject;
 
-                npcState = NPC_State.Follow;
+                    npcState = NPC_State.Follow;
+                }
             }
         }
     }
@@ -224,43 +289,53 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         return nearestEntity;
     }
 
-    public NPC_State EnemyDetection()
+    public void EnemyDetection()
     {
         Debug.Log("Searching for nearby enemy...");
 
         if (_Target == null && npcState != NPC_State.Attack)
         {
             GameObject NearestPlayer = FindNearestEntity(_Enemies);
-            List<GameObject> Opponents = new List<GameObject>();
 
             GameObject Target = null;
 
-            foreach (GameObject x in _Opponents)
+            if (_Opponents.Count > 0)
             {
-                if (x.GetComponent<NPCBehavior>()._AllyPlayer == NearestPlayer) Opponents.Add(x);
+                foreach (GameObject x in _Opponents)
+                {
+                    if (x.GetComponent<NPCBehavior>()._AllyPlayer == NearestPlayer && Targets.Contains(x) == false) Targets.Add(x);
+                }
             }
 
-            if (Opponents != null)
+            if (Targets.Contains(NearestPlayer) == false) Targets.Add(NearestPlayer);
+
+            if (Targets != null )
             {
-                Target = FindNearestEntity(Opponents);
+                Target = FindNearestEntity(Targets);
             }
             else
             {
-                Target = NearestPlayer;
+                if (_Enemies != null) Target = NearestPlayer;
+                else
+                {
+                    if (_IsAlly) npcState = NPC_State.Follow;
+                    else npcState = NPC_State.Patrol;
+                }
             }
 
-            if (Target != null && Vector3.Distance(Target.transform.position, transform.position) <= _DetectionRange)
+            if (Target != null)
             {
-                Debug.Log("Enemy detected. Switching state to Chase");
+                if (Vector3.Distance(Target.transform.position, transform.position) <= _DetectionRange)
+                {
+                    Debug.Log("Enemy detected. Switching state to Chase");
 
-                npcState = NPC_State.Chase;
-                _Target = Target;
+                    npcState = NPC_State.Chase;
+                    _Target = Target;
+                }
+                else if (_IsAlly) npcState = NPC_State.Follow;
+                else npcState = NPC_State.Patrol;
             }
-            else if (_IsAlly) npcState = NPC_State.Follow;
-            else npcState = NPC_State.Patrol;
         }
-
-        return npcState;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

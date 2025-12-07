@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     private Rigidbody2D rb;
     private Vector2 velocity;
     private Player_State pState;
-    private GameManager gManager;
+    public GameManager gManager;
 
     [Header("Game Objects")]
     CharacterController Player;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
     [Header("Player Stats")]
     [SerializeField] private float playerMaxHealth = 100f;
-    [SerializeField] private float playerCurrentHealth;
+    public float playerCurrentHealth;
     [SerializeField] private float playerMaxStamina = 100f;
     [SerializeField] private float playerCurrentStamina;
     [SerializeField] private float dmg = 35f;
@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     private Vector3 net_Pos;
     private Quaternion net_Rot;
 
+    void Awake()
+    {
+        gManager = FindAnyObjectByType<GameManager>();
+    }
 
     void Start()
     {
@@ -79,8 +83,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         playerCurrentStamina = playerMaxStamina;
         pState = Player_State.Human;
         Player = GetComponent<CharacterController>();
-        hitboxController = hitBox.GetComponent<HitboxRegister>();
-        gManager = FindAnyObjectByType<GameManager>(); 
+        hitboxController = hitBox.GetComponent<HitboxRegister>(); 
         PlayerObj.SetActive(true);
         BloodNado.SetActive(false);
         hitBox.SetActive(false);
@@ -309,6 +312,20 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
         playerRenderer.material.SetTexture(TextureArrayID, sheetArray);
         playerRenderer.material.SetFloat(TextureIndexID, (float)frameIndex);
+    }
+
+    public void IsAttacked(float dmg)
+    {
+        if (playerCurrentHealth <= 0)
+        {
+            Debug.Log($"{this.gameObject} is down.");
+            CanMove = false;
+            this.gameObject.SetActive(false);
+        }
+        else
+        {
+            playerCurrentHealth -= dmg;
+        }
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

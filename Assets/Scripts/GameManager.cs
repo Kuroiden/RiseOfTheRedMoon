@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (isDaytime)
         {
-            daytimeTimer -= Time.deltaTime;
+            daytimeDuration -= Time.deltaTime;
 
-            if (daytimeTimer < 0)
+            if (daytimeDuration < 0)
             {
-                daytimeTimer = 0;
+                daytimeDuration = 0;
                 isDaytime = false;
                 isNighttime = true;
                 Dlight.SetActive(false);
