@@ -9253,6 +9253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1299282379
 GameObject:
   m_ObjectHideFlags: 0
@@ -9342,6 +9343,8 @@ Transform:
   - {fileID: 817349121}
   m_Father: {fileID: 499641734}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
@@ -11598,7 +11601,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1001 &1588628210
@@ -12238,7 +12244,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_NavMeshData: {fileID: 23800000, guid: 25222226f8256964283b09444bc4ffd8, type: 2}
+=======
+  m_NavMeshData: {fileID: 23800000, guid: 2ccb0b1e77eedcf4a92c5d9336818c96, type: 2}
+>>>>>>> Stashed changes
 =======
   m_NavMeshData: {fileID: 23800000, guid: 2ccb0b1e77eedcf4a92c5d9336818c96, type: 2}
 >>>>>>> Stashed changes
@@ -15658,6 +15668,7 @@ SceneRoots:
   m_Roots:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 1693486718}
   - {fileID: 1669522495}
   - {fileID: 499641734}
@@ -15669,6 +15680,8 @@ SceneRoots:
   - {fileID: 1067997407}
   - {fileID: 928028239}
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   - {fileID: 1021182990}
@@ -15686,6 +15699,9 @@ SceneRoots:
   - {fileID: 1054579046}
   - {fileID: 419447011}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
