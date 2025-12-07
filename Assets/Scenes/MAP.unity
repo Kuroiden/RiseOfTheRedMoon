@@ -569,7 +569,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -602,14 +606,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -632,18 +639,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &102622178 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 102622177}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &106735725
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 539384575561655624, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_Name
@@ -680,14 +686,16 @@ PrefabInstance:
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -706,11 +714,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
---- !u!4 &106735726 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
-  m_PrefabInstance: {fileID: 106735725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &127698033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1127,7 +1130,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 8522017736202008822, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_Name
@@ -1152,14 +1159,17 @@ PrefabInstance:
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1178,11 +1188,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
---- !u!4 &173530221 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
-  m_PrefabInstance: {fileID: 173530220}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &178811447
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1321,7 +1326,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -1342,6 +1351,7 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1354,14 +1364,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1384,18 +1397,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &182102070 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 182102069}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &186286609
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -1416,6 +1428,7 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1428,14 +1441,16 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1458,11 +1473,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &186286610 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 186286609}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &220288690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3535,7 +3545,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2469285269080447694, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_Name
@@ -3572,14 +3586,17 @@ PrefabInstance:
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3598,18 +3615,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
---- !u!4 &486510220 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
-  m_PrefabInstance: {fileID: 486510219}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &499131916
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2610128803889303743, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_Name
@@ -3638,6 +3654,7 @@ PrefabInstance:
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3664,11 +3681,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
---- !u!4 &499131917 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
-  m_PrefabInstance: {fileID: 499131916}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &499494564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3843,7 +3855,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2610128803889303743, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_Name
@@ -3872,6 +3888,7 @@ PrefabInstance:
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3898,11 +3915,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
---- !u!4 &503834725 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
-  m_PrefabInstance: {fileID: 503834724}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &505792632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5455,7 +5467,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -5488,14 +5504,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5518,11 +5537,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &817349121 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 817349120}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &845019151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5591,7 +5605,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2469285269080447694, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_Name
@@ -5628,14 +5646,17 @@ PrefabInstance:
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5654,18 +5675,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
---- !u!4 &846658013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
-  m_PrefabInstance: {fileID: 846658012}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &854863180
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalScale.x
@@ -5698,14 +5718,17 @@ PrefabInstance:
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5728,11 +5751,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
---- !u!4 &854863181 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
-  m_PrefabInstance: {fileID: 854863180}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &857295799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5863,7 +5881,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2469285269080447694, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_Name
@@ -5888,14 +5910,17 @@ PrefabInstance:
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5914,6 +5939,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
+<<<<<<< HEAD
 --- !u!4 &872412926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
@@ -5924,6 +5950,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8696288475768961056, guid: 654dbfa2035431b4cb187a1bf40abfe8, type: 3}
   m_PrefabInstance: {fileID: 2111326455}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of eda7782 (Update MAP.unity)
 --- !u!1 &884795925
 GameObject:
   m_ObjectHideFlags: 0
@@ -6057,7 +6085,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -6090,14 +6122,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6120,11 +6155,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &897912183 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 897912182}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &900655591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8474,7 +8504,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 539384575561655624, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_Name
@@ -8511,14 +8545,17 @@ PrefabInstance:
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8537,11 +8574,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
---- !u!4 &1178345108 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
-  m_PrefabInstance: {fileID: 1178345107}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1192413252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8610,7 +8642,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2469285269080447694, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_Name
@@ -8647,14 +8683,17 @@ PrefabInstance:
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8673,11 +8712,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
---- !u!4 &1206401346 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
-  m_PrefabInstance: {fileID: 1206401345}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1209283398
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8746,7 +8780,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2610128803889303743, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_Name
@@ -8775,6 +8813,7 @@ PrefabInstance:
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -8801,11 +8840,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
---- !u!4 &1215190474 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
-  m_PrefabInstance: {fileID: 1215190473}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1220623582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9129,7 +9163,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 8522017736202008822, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_Name
@@ -9154,14 +9192,17 @@ PrefabInstance:
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9180,11 +9221,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
---- !u!4 &1249436140 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9011589974664307276, guid: e4eb7673cffa8d64db9f7562cfbf4c54, type: 3}
-  m_PrefabInstance: {fileID: 1249436139}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1263567748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11067,7 +11103,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -11100,14 +11140,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11130,18 +11173,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &1535840640 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 1535840639}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1539967979
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 539384575561655624, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_Name
@@ -11178,14 +11220,17 @@ PrefabInstance:
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11204,11 +11249,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
---- !u!4 &1539967980 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
-  m_PrefabInstance: {fileID: 1539967979}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1542092907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11277,7 +11317,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 539384575561655624, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_Name
@@ -11302,14 +11346,17 @@ PrefabInstance:
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11328,18 +11375,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
---- !u!4 &1543800535 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 880339126637641714, guid: 6a3c7e23696223b4bb8b0c3b046bafd1, type: 3}
-  m_PrefabInstance: {fileID: 1543800534}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1562129285
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2469285269080447694, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_Name
@@ -11376,14 +11422,17 @@ PrefabInstance:
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11402,18 +11451,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
---- !u!4 &1562129286 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2958717010908102772, guid: d5241c43c565e9843b7707dc5e93c69f, type: 3}
-  m_PrefabInstance: {fileID: 1562129285}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1566824514
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalScale.x
@@ -11434,6 +11482,7 @@ PrefabInstance:
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11446,14 +11495,17 @@ PrefabInstance:
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11476,11 +11528,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
---- !u!4 &1566824515 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2691111484129794282, guid: e5dd33a022bdeee408505d6cbe728f24, type: 3}
-  m_PrefabInstance: {fileID: 1566824514}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1581553082
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11791,7 +11838,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -11812,6 +11863,7 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11824,14 +11876,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11854,18 +11909,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &1609446764 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 1609446763}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1613814804
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -11898,14 +11952,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11928,11 +11985,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &1613814805 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 1613814804}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1619376724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12221,8 +12273,43 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -42.5, y: 0, z: -42.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+<<<<<<< HEAD
   m_ConstrainProportionsScale: 1
   m_Children: []
+=======
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1025849095}
+  - {fileID: 1382942018}
+  - {fileID: 1021627091}
+  - {fileID: 1378427746}
+  - {fileID: 1721150769}
+  - {fileID: 288947058}
+  - {fileID: 645335155}
+  - {fileID: 1000482679}
+  - {fileID: 1360611768}
+  - {fileID: 1716800261}
+  - {fileID: 2072163349}
+  - {fileID: 640976635}
+  - {fileID: 996344267}
+  - {fileID: 1356739352}
+  - {fileID: 1712701745}
+  - {fileID: 2067857213}
+  - {fileID: 636132378}
+  - {fileID: 1707753136}
+  - {fileID: 1348313040}
+  - {fileID: 1343463863}
+  - {fileID: 979663579}
+  - {fileID: 2050667404}
+  - {fileID: 1686897268}
+  - {fileID: 1669638243}
+  - {fileID: 1529037278}
+  - {fileID: 220288691}
+  - {fileID: 1672202059}
+  - {fileID: 932636117}
+  - {fileID: 137891686}
+  - {fileID: 1639848966}
+>>>>>>> parent of eda7782 (Update MAP.unity)
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1669522496
@@ -14217,7 +14304,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 2610128803889303743, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_Name
@@ -14246,6 +14337,7 @@ PrefabInstance:
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -14272,11 +14364,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
---- !u!4 &1935283224 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3419035851439868421, guid: 50503baa45f1e414b85addf0ae1ac3d6, type: 3}
-  m_PrefabInstance: {fileID: 1935283223}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1945459152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14345,7 +14432,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 8146921001365534711, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
       propertyPath: m_Name
@@ -14382,14 +14473,17 @@ PrefabInstance:
     - target: {fileID: 8810305103639588173, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810305103639588173, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810305103639588173, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810305103639588173, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14408,18 +14502,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
---- !u!4 &1952300520 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8810305103639588173, guid: 99e0d67921fb3854b9459b500e18a102, type: 3}
-  m_PrefabInstance: {fileID: 1952300519}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1969611288
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -14452,14 +14545,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14482,11 +14578,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &1969611289 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 1969611288}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1971447852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14555,7 +14646,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
+<<<<<<< HEAD
     m_TransformParent: {fileID: 1299282380}
+=======
+    m_TransformParent: {fileID: 0}
+>>>>>>> parent of eda7782 (Update MAP.unity)
     m_Modifications:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalScale.x
@@ -14588,14 +14683,17 @@ PrefabInstance:
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14618,11 +14716,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
---- !u!4 &1973926257 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7044494333629167188, guid: 1da402c12bc262e49876e0f0c7e76359, type: 3}
-  m_PrefabInstance: {fileID: 1973926256}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1976139005
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15707,6 +15800,36 @@ SceneRoots:
 =======
 >>>>>>> Stashed changes
 =======
+  - {fileID: 1973926256}
+  - {fileID: 186286609}
+  - {fileID: 897912182}
+  - {fileID: 1613814804}
+  - {fileID: 1969611288}
+  - {fileID: 182102069}
+  - {fileID: 1609446763}
+  - {fileID: 1249436139}
+  - {fileID: 173530220}
+  - {fileID: 1952300519}
+  - {fileID: 872412925}
+  - {fileID: 503834724}
+  - {fileID: 1935283223}
+  - {fileID: 499131916}
+  - {fileID: 1215190473}
+  - {fileID: 854863180}
+  - {fileID: 1566824514}
+  - {fileID: 1206401345}
+  - {fileID: 846658012}
+  - {fileID: 1562129285}
+  - {fileID: 486510219}
+  - {fileID: 1543800534}
+  - {fileID: 1539967979}
+  - {fileID: 106735725}
+  - {fileID: 1178345107}
+  - {fileID: 1535840639}
+  - {fileID: 102622177}
+  - {fileID: 817349120}
+>>>>>>> parent of eda7782 (Update MAP.unity)
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -15717,6 +15840,7 @@ SceneRoots:
   - {fileID: 460754603}
   - {fileID: 1986293441}
   - {fileID: 1119543004}
+<<<<<<< HEAD
   - {fileID: 512256697}
   - {fileID: 660500453}
   - {fileID: 1168957087}
