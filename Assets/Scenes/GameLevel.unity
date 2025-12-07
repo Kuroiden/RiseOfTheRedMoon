@@ -15588,6 +15588,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entity (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17390,7 +17394,7 @@ MonoBehaviour:
   Dlight: {fileID: 705507993}
   isNighttime: 0
   Nlight: {fileID: 990296682}
-  daytimeDuration: 2
+  daytimeDuration: 3000
   TimerUI: {fileID: 1983682127}
 --- !u!1001 &1032631654
 PrefabInstance:
@@ -18588,6 +18592,10 @@ PrefabInstance:
     - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
       propertyPath: m_Name
       value: Entity (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20485,6 +20493,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entity (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21991,6 +22003,7 @@ GameObject:
   - component: {fileID: 1487175987}
   - component: {fileID: 1487175986}
   - component: {fileID: 1487175985}
+  - component: {fileID: 1487175988}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -22078,6 +22091,37 @@ Transform:
   - {fileID: 2035050041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487175988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487175984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 57133d91011214b49ae8fbeef124468a, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1001 &1493947327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24899,6 +24943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entity (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27023,6 +27071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 3681516084629242188, guid: d7293536f75362c40bebb26b07f00d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27036,12 +27088,12 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 990296684}
   - {fileID: 146714136}
+  - {fileID: 1487175987}
   - {fileID: 389449944804783492}
   - {fileID: 9060814613619372861}
   - {fileID: 1126855408}
   - {fileID: 1854152617}
   - {fileID: 373116615}
-  - {fileID: 1487175987}
   - {fileID: 782470451}
   - {fileID: 1360023565}
   - {fileID: 209097219}
