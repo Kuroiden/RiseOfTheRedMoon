@@ -60,6 +60,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         _Opponents = new List<GameObject>();
         Targets = new List<GameObject>();
         atkCooldown = atkCooldownDuration;
+        net_Pos = transform.position;
     }
 
     void Update()
@@ -172,12 +173,12 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
                     _isAttacking = true;
 
                     if (_Target.CompareTag("AI")) _Target.GetComponent<NPCBehavior>().TakeDamage(atk);
-                    else _Target.GetComponent<PlayerController>().TakeDamage(atk);
+                    if (_Target.CompareTag("Player")) _Target.GetComponent<PlayerController>().TakeDamage(atk);
                 }
                 else
                 {
                     if (_Target.CompareTag("AI")) _Opponents.Remove(_Target);
-                    else _Enemies.Remove(_Target);
+                    if (_Target.CompareTag("Player")) _Enemies.Remove(_Target);
 
                     Targets.Remove(_Target);
 
@@ -192,11 +193,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         }
     }
 
-    private void _NPC_Roam()
-    {
-
-    }
-
+    [PunRPC]
     public void TakeDamage(float damage)
     {
         // The Master Client (or the owner of the object) should usually handle health reduction
@@ -348,7 +345,17 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting) stream.SendNext(transform.position);
-        else net_Pos = (Vector3)stream.ReceiveNext();
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(npcState);
+            stream.SendNext(npcCurrentHealth);
+        }
+        else
+        {
+            net_Pos = (Vector3)stream.ReceiveNext();
+            npcState = (NPC_State)stream.ReceiveNext();
+            npcCurrentHealth = (float)stream.ReceiveNext();
+        }
     }
 }

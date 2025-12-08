@@ -10,9 +10,13 @@ public class NPCSpawning : MonoBehaviourPunCallbacks
     
     void Start()
     {
-        SpawnNPC();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SpawnNPC();
+        }
     }
 
+    [PunRPC]
     public void SpawnNPC()
     {
         Vector3 spawnPos;
@@ -22,7 +26,7 @@ public class NPCSpawning : MonoBehaviourPunCallbacks
         {
             spawnPos = new Vector3(Random.Range(-35f, 35.1f), 0.5f, Random.Range(-35f, 35.1f));
 
-            Instantiate(npcObject, spawnPos, spawnRot);
+            PhotonNetwork.Instantiate(npcObject.name, spawnPos, spawnRot);
         }
     }
 }

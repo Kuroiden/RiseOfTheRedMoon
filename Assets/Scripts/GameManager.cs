@@ -4,19 +4,21 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Security.Cryptography.X509Certificates;
+using System.Linq;
+using Photon.Pun.UtilityScripts;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
     [Header("Session Variables")]
+    public static string RoomID;
     public bool isDaytime;
     public GameObject Dlight;
     public bool isNighttime;
     public GameObject Nlight    ;
     [SerializeField] private float daytimeDuration;
-    private float daytimeTimer;
 
     [Header("UI Elements")]
+    public TextMeshProUGUI RoomIDUI;
     public TextMeshProUGUI TimerUI;
     public TextMeshProUGUI MsgUI;
 
@@ -28,9 +30,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         Dlight.SetActive(true);
-        daytimeTimer = daytimeDuration;
         isDaytime = true;
         isNighttime = false;
+        RoomIDUI.text = RoomID.ToString();
     }
 
     // Update is called once per frame
@@ -70,7 +72,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void StartDaylightTimer()
     {
-       
         if (PhotonNetwork.IsMasterClient && !isDaytime)
         {
             photonView.RPC("RPC_StartDaylightTimer", RpcTarget.AllBuffered, PhotonNetwork.Time);
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_StartDaylightTimer(double startTime)
     {
-        daytimeTimer = daytimeDuration;
         isDaytime = true;
         Debug.Log("Photon PUN timer started!");
     }

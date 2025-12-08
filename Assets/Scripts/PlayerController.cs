@@ -4,10 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class PlayerController : MonoBehaviourPun, IPunObservable
+public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 {
     private Rigidbody2D rb;
     private Vector2 velocity;
@@ -25,7 +26,11 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     [SerializeField] private ParticleSystem slashVFX;
     [SerializeField] private ParticleSystem dashVFX;
     [SerializeField] private float attackVerticalOffset = -0.5f;
-    
+    [SerializeField] private GameObject loseScreen;
+    [SerializeField] private GameObject winScreen;
+    private bool winnerIsFound;
+
+
     public Texture[] PlayerTexture; // This can be replaced with a Texture2DArray I think, I just don't know how to use it
     public Texture[] WolfTexture;
     public Sprite[] PlayerSprites;
@@ -68,9 +73,9 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     private Vector3 lastFacingDirection = Vector3.forward;
 
     [Header("Photon PUN Variables")]
-    public int playerID;
     private Vector3 net_Pos;
     private Quaternion net_Rot;
+    private PhotonView pv;
 
     void Awake()
     {
@@ -89,103 +94,110 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         hitBox.SetActive(false);
         net_Pos = transform.position;
         net_Rot = transform.rotation;
-
-
-        //playerID = PhotonNetwork.LocalPlayer.ActorNumber;
+        winnerIsFound = false;
+        pv = GetComponent<PhotonView>();
     }
 
     void Update()
     {
-        Vector3 moveForward = transform.TransformDirection(Vector3.forward);
-        Vector3 moveRight = transform.TransformDirection(Vector3.right);
+        CheckIfWinner();
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        float charDisplacementX = CanMove ? (isRunning ? runSpd : walkSpd) * Input.GetAxis("Vertical") : 0;
-        float charDisplacementZ = CanMove ? (isRunning ? runSpd : walkSpd) * Input.GetAxis("Horizontal") : 0;
-
-        Vector3 currentInputMovement = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
-
-        //updatePos = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
-
-        if (isRunning && currentInputMovement.magnitude > 0.1f)
+        if (pv.IsMine)
         {
-            if (playerCurrentStamina > 0)
+            Vector3 moveForward = transform.TransformDirection(Vector3.forward);
+            Vector3 moveRight = transform.TransformDirection(Vector3.right);
+
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+
+            float charDisplacementX = CanMove ? (isRunning ? runSpd : walkSpd) * Input.GetAxis("Vertical") : 0;
+            float charDisplacementZ = CanMove ? (isRunning ? runSpd : walkSpd) * Input.GetAxis("Horizontal") : 0;
+
+            Vector3 currentInputMovement = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
+
+            //updatePos = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
+
+            if (isRunning && currentInputMovement.magnitude > 0.1f)
             {
-                playerCurrentStamina -= (runCost * Time.deltaTime);
-                playerCurrentStamina = Mathf.Max(0, playerCurrentStamina);
+                if (playerCurrentStamina > 0)
+                {
+                    playerCurrentStamina -= (runCost * Time.deltaTime);
+                    playerCurrentStamina = Mathf.Max(0, playerCurrentStamina);
+                }
+
+                if (playerCurrentStamina <= 0)
+                {
+                    // Force running speed down to walk speed.
+                    charDisplacementX = CanMove ? walkSpd * Input.GetAxis("Vertical") : 0;
+                    charDisplacementZ = CanMove ? walkSpd * Input.GetAxis("Horizontal") : 0;
+                }
+            }
+            else if (!isRunning && !isAttacking && !isDashing && playerCurrentStamina < playerMaxStamina)
+            {
+                float regenAmount = staminaRegenRate * Time.deltaTime;
+                playerCurrentStamina = Mathf.Min(playerMaxStamina, playerCurrentStamina + regenAmount);
             }
 
-            if (playerCurrentStamina <= 0)
+            updatePos = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
+
+            // Keeps player grounded
+            if (!Player.isGrounded) updatePos.y -= gravity * 100f * Time.deltaTime;
+
+            if (CanMove && !isDashing)
             {
-                // Force running speed down to walk speed.
-                charDisplacementX = CanMove ? walkSpd * Input.GetAxis("Vertical") : 0;
-                charDisplacementZ = CanMove ? walkSpd * Input.GetAxis("Horizontal") : 0;
+                    Player.Move(updatePos * Time.deltaTime);
             }
-        }
-        else if (!isRunning && !isAttacking && !isDashing && playerCurrentStamina < playerMaxStamina)
-        {
-            float regenAmount = staminaRegenRate * Time.deltaTime;
-            playerCurrentStamina = Mathf.Min(playerMaxStamina, playerCurrentStamina + regenAmount);
-        }
 
-        updatePos = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
-
-        // Keeps player grounded
-        if (!Player.isGrounded) updatePos.y -= gravity * 100f * Time.deltaTime;
-
-        if (CanMove && !isDashing)
-        {
-                Player.Move(updatePos * Time.deltaTime);
-        }
-
-        
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
-        {
-            // Update texture (already present)
-            PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[0] : WolfTexture[0];
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                // Update texture (already present)
+                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[0] : WolfTexture[0];
             
-            lastFacingDirection = transform.forward;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
-        {
-            PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[1] : WolfTexture[1];
-            lastFacingDirection = -transform.right;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
-        {
-            PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[2] : WolfTexture[2];
-            lastFacingDirection = -transform.forward; 
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
-        {
-            PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[3] : WolfTexture[3];
-            lastFacingDirection = transform.right;
-        }
+                lastFacingDirection = transform.forward;
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+            {
+                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[1] : WolfTexture[1];
+                lastFacingDirection = -transform.right;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+            {
+                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[2] : WolfTexture[2];
+                lastFacingDirection = -transform.forward; 
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            {
+                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[3] : WolfTexture[3];
+                lastFacingDirection = transform.right;
+            }
         
-
-        if (gManager != null)
-        {
-            if (gManager.isNighttime)
+            if (gManager != null)
             {
-                pState = Player_State.Werewolf;
-                BloodNado.SetActive(true);
-                Claws.SetActive(true);
+                if (gManager.isNighttime)
+                {
+                    pState = Player_State.Werewolf;
+                    BloodNado.SetActive(true);
+                    Claws.SetActive(true);
+                }
+                else
+                {
+                    pState = Player_State.Human;
+                }
             }
-            else
+            if(Input.GetMouseButtonDown(0) && CanMove)
             {
-                pState = Player_State.Human;
+                Attack();
             }
+            if (Input.GetKeyDown(KeyCode.LeftControl) && CanMove)
+            {
+                Dash();
+            }
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, net_Pos, Time.deltaTime * 10f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, net_Rot, Time.deltaTime);
         }
 
-        if(Input.GetMouseButtonDown(0) && CanMove)
-        {
-            Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftControl) && CanMove)
-        {
-            Dash();
-        }
     }
 
     void Attack()
@@ -267,8 +279,6 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
         hitBox.SetActive(false);
         isAttacking = false;
-
-       
     }
 
     private IEnumerator DashSequence()
@@ -327,6 +337,7 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         }
     }
 
+    [PunRPC]
     void Die()
     {
         pState = Player_State.Dead;
@@ -334,12 +345,27 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
 
         this.gameObject.SetActive(false);
 
-        //PlayerObj.SetActive(false);
-        //BloodNado.SetActive(false);
-        //Claws.SetActive(false);
-
-        //GetComponent<CharacterController>().enabled = false;
+        if (pv.IsMine) loseScreen.SetActive(true);
     }
+
+    void CheckIfWinner()
+    {
+        if (!winnerIsFound)
+        {
+            List<GameObject> ActivePlayers = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
+
+            foreach (GameObject player in ActivePlayers)
+            {
+                if (player.GetComponent<PlayerController>().pState == Player_State.Dead) ActivePlayers.Remove(player);
+            }
+
+            if (ActivePlayers.Count == 1) winnerIsFound = true;
+        }
+        else
+        {
+            if (pv.IsMine && gManager.isNighttime) winScreen.SetActive(true);
+        }
+}
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -347,11 +373,17 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+            stream.SendNext(pState);
+            stream.SendNext(playerCurrentHealth);
+            stream.SendNext(playerCurrentStamina);
         }
         else
         {
             net_Pos = (Vector3)stream.ReceiveNext();
             net_Rot = (Quaternion)stream.ReceiveNext();
+            pState = (Player_State)stream.ReceiveNext();
+            playerCurrentHealth = (float)stream.ReceiveNext();
+            playerCurrentStamina = (float)stream.ReceiveNext();
         }
     }
 }

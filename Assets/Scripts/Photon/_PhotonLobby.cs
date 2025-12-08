@@ -15,17 +15,11 @@ public class _PhotonLobby : MonoBehaviourPunCallbacks
 
     [Header("UI Objects")]
     public GameObject Menu_UI;
-    public GameObject Lobby_UI;
 
     public Button b_CreateRoom;
     public Button b_JoinRoom;
     public GameObject b_Cancel;
-    public Button b_ExitGame;
-    public Button b_CopyCode;
-    public Button b_LeaveRoom;
-    public Button b_StartGame;
 
-    public TMP_InputField f_GenerateCode;
     public TMP_InputField f_InputCode;
 
     public GameObject o_Offline;
@@ -81,17 +75,18 @@ public class _PhotonLobby : MonoBehaviourPunCallbacks
     // Other Functions
     public void CreateRoom()
     {
-        Debug.Log("Creating new room...");
-        int RoomCode = Random.Range(0000, 10000);
+        Debug.Log("Trying to create a new room");
+        int RoomCode = Random.Range(0, 10000);
 
         RoomOptions roomOptions = new RoomOptions()
         {
             IsVisible = true,
             IsOpen = true,
-            MaxPlayers = 8
+            MaxPlayers = 3
         };
         PhotonNetwork.CreateRoom(RoomCode.ToString(), roomOptions);
         Debug.Log($"Room {RoomCode} created!");
+        GameManager.RoomID = RoomCode.ToString();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -113,6 +108,7 @@ public class _PhotonLobby : MonoBehaviourPunCallbacks
         {
             Debug.Log($"Trying to join specific room: {roomToJoin}");
             PhotonNetwork.JoinRoom(roomToJoin);
+            GameManager.RoomID = roomToJoin;
         }
     }
 

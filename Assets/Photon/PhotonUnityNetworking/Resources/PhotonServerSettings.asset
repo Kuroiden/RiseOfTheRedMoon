@@ -42,6 +42,9 @@ MonoBehaviour:
   - RPC_StartDaylightTimer
   - RPC_ChangeDayNightState
   - TakeDamage
+  - SpawnNPC
+  - checkPlayers
+  - Die
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

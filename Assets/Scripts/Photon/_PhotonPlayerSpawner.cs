@@ -64,39 +64,47 @@ public class _PhotonPlayerSpawner : MonoBehaviourPunCallbacks
         playerId = PhotonNetwork.LocalPlayer.ActorNumber;
         Debug.Log("playerID: " + playerId);
 
-        Transform spawnLocation;
+        Transform spawnLocation = null;
 
-        if (playerId == 1)
+        switch (playerId)
         {
-            spawnLocation = spawnPoints[0];
-        }
-        else if (playerId == 2)
-        {
-            spawnLocation = spawnPoints[1];
-        }
-        else
-        {
-            spawnLocation = spawnPoints[2];
+            case 1:
+                spawnLocation = spawnPoints[0];
+                break;
+
+            case 2:
+                spawnLocation = spawnPoints[1];
+                break;
+            
+            case 3:
+                spawnLocation = spawnPoints[2];
+                break;
+
+            case 4:
+                spawnLocation = spawnPoints[3];
+                break;
+
+            case 5:
+                spawnLocation = spawnPoints[4];
+                break;
+
+            case 6:
+                spawnLocation = spawnPoints[5];
+                break;
+
+            case 7:
+                spawnLocation = spawnPoints[6];
+                break;
+
+            case 8:
+                spawnLocation = spawnPoints[7];
+                break;
         }
 
         // Instantiate over network
         GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, spawnLocation.rotation);
 
-        // Get PhotonView & ColorSync script
-        PhotonView pv = newPlayer.GetComponent<PhotonView>();
-
-        // Choose color based on player ID
-        Color chosenColor;
-        if (playerId == 1) chosenColor = Color.red;
-        else if (playerId == 2) chosenColor = Color.green;
-        else chosenColor = Color.blue;
-
-        // Use RPC to sync color across network (Buffered so late joiners see correct color too)
-        pv.RPC("SetColor", RpcTarget.AllBuffered, chosenColor.r, chosenColor.g, chosenColor.b);
-
         // Store reference
         PhotonNetwork.LocalPlayer.TagObject = newPlayer;
-
-        Debug.Log($"Spawned player {playerId} with color {chosenColor}");
     }
 }
