@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     private float daytimeTimer;
 
     [Header("UI Elements")]
-    public TextMeshPro TimerUI;
+    public TextMeshProUGUI TimerUI;
+    public TextMeshProUGUI MsgUI;
 
     void Awake()
     {
@@ -41,6 +42,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             if (daytimeDuration < 0)
             {
+                MsgUI.text = "The red moon has risen.";
+
                 daytimeDuration = 0;
                 isDaytime = false;
                 isNighttime = true;
@@ -97,9 +100,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (TimerUI != null)
         {
-            int minutes = Mathf.FloorToInt(daytimeTimer / 60);
-            int seconds = Mathf.FloorToInt(daytimeTimer % 60);
+            int minutes = Mathf.FloorToInt(daytimeDuration / 60);
+            int seconds = Mathf.FloorToInt(daytimeDuration % 60);
             TimerUI.text = $"{minutes:00}:{seconds:00}";
+
+            if (daytimeDuration <= 0)
+            {
+                TimerUI.text = "";
+            }
         }
     }
 }

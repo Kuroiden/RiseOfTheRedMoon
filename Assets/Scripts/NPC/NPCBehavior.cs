@@ -47,6 +47,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         nmAgent = GetComponent<NavMeshAgent>();
         npcState = NPC_State.Passive;
         isFacingLeft = false;
+        atkVFX.SetActive(false);
 
         _IsAlly = false;
 
@@ -159,6 +160,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
                 atkCooldown -= Time.deltaTime;
                 if (atkCooldown <= 0)
                 {
+                    atkVFX.SetActive(false);
                     _isAttacking = false;
                     atkCooldown = atkCooldownDuration;
                 }
@@ -170,9 +172,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
                     _isAttacking = true;
 
                     if (_Target.CompareTag("AI")) _Target.GetComponent<NPCBehavior>().TakeDamage(atk);
-                    else _Target.GetComponent<PlayerController>().IsAttacked(atk);
-
-                    
+                    else _Target.GetComponent<PlayerController>().TakeDamage(atk);
                 }
                 else
                 {
@@ -283,12 +283,15 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         GameObject nearestEntity = null;
         float entityDist = 0f;
 
-        for (int i = 0; i < EntityList.Count; i++)
+        if (EntityList.Count > 0)
         {
-            float AllyToOppDist = Vector3.Distance(EntityList[i].transform.position, transform.position);
+            for (int i = 0; i < EntityList.Count; i++)
+            {
+                float AllyToOppDist = Vector3.Distance(EntityList[i].transform.position, transform.position);
 
-            if (entityDist == 0 && nearestEntity == null) nearestEntity = EntityList[i];
-            else if (AllyToOppDist < entityDist) nearestEntity = EntityList[i];
+                if (entityDist == 0 && nearestEntity == null) nearestEntity = EntityList[i];
+                else if (AllyToOppDist < entityDist) nearestEntity = EntityList[i];
+            }
         }
 
         return nearestEntity;

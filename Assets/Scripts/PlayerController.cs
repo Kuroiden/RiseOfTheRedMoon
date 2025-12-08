@@ -314,18 +314,31 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         playerRenderer.material.SetFloat(TextureIndexID, (float)frameIndex);
     }
 
-    public void IsAttacked(float dmg)
+    [PunRPC]
+    public void TakeDamage(float dmg)
     {
+        if (pState == Player_State.Dead) return;
+
+        playerCurrentHealth -= dmg;
+
         if (playerCurrentHealth <= 0)
         {
-            Debug.Log($"{this.gameObject} is down.");
-            CanMove = false;
-            this.gameObject.SetActive(false);
+            Die();
         }
-        else
-        {
-            playerCurrentHealth -= dmg;
-        }
+    }
+
+    void Die()
+    {
+        pState = Player_State.Dead;
+        CanMove = false;
+
+        this.gameObject.SetActive(false);
+
+        //PlayerObj.SetActive(false);
+        //BloodNado.SetActive(false);
+        //Claws.SetActive(false);
+
+        //GetComponent<CharacterController>().enabled = false;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

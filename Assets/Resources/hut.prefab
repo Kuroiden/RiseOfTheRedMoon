@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 395.14746
+      value: 48.694916
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12169838
+      value: 0.09175905
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 478.4808
+      value: -33.208374
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60,6 +60,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8368632620507015429, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8368632620507015429, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1715394952284000574, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1715394952284000574, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_Name
       value: hut
@@ -80,6 +96,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d56ac5ec9fe7f674fbc1fa1f72d214fb, type: 2}
+    - target: {fileID: 7136394936232288405, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7136394936232288405, guid: 2557f028bc6721140ac1985262643bda, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7605402787860497941, guid: 2557f028bc6721140ac1985262643bda, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
