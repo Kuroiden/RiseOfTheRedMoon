@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
@@ -16,11 +17,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool isNighttime;
     public GameObject Nlight    ;
     [SerializeField] private float daytimeDuration;
+    public static bool isGameStarted = false;
+    public int playerCount;
 
     [Header("UI Elements")]
     public TextMeshProUGUI RoomIDUI;
     public TextMeshProUGUI TimerUI;
     public TextMeshProUGUI MsgUI;
+    public GameObject Start_btn;
+    public GameObject WinnerScreen;
+    public GameObject LoseScreen;
 
     void Awake()
     {
@@ -33,35 +39,46 @@ public class GameManager : MonoBehaviourPunCallbacks
         isDaytime = true;
         isNighttime = false;
         RoomIDUI.text = RoomID.ToString();
+        WinnerScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Start_btn.SetActive(true);
+        }
+        else Start_btn.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDaytime)
+        if (/*PhotonNetwork.CurrentRoom.PlayerCount == playerCount &&*/ isGameStarted)
         {
-            daytimeDuration -= Time.deltaTime;
-
-            if (daytimeDuration < 0)
+            if (isDaytime)
             {
-                MsgUI.text = "The red moon has risen.";
+                daytimeDuration -= Time.deltaTime;
 
-                daytimeDuration = 0;
-                isDaytime = false;
-                isNighttime = true;
-                Dlight.SetActive(false);
-                Nlight.SetActive(true);
-
-
-                if (PhotonNetwork.IsMasterClient)
+                if (daytimeDuration < 0)
                 {
-                    photonView.RPC("RPC_ChangeDayNightState", RpcTarget.AllBuffered, isNighttime);
+                    MsgUI.text = "The red moon has risen.";
+
+                    daytimeDuration = 0;
+                    isDaytime = false;
+                    isNighttime = true;
+                    Dlight.SetActive(false);
+                    Nlight.SetActive(true);
+
+
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        photonView.RPC("RPC_ChangeDayNightState", RpcTarget.AllBuffered, isNighttime);
+                    }
+
                 }
 
+                // Update UI timer
+                UpdateTimerUI();
             }
-
-            // Update UI timer
-            UpdateTimerUI();
         }
     }
 
@@ -109,5 +126,21 @@ public class GameManager : MonoBehaviourPunCallbacks
                 TimerUI.text = "";
             }
         }
+    }
+
+    [PunRPC]
+    void OnButtonStart()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("RPC_StartGame", RpcTarget.AllBuffered, null);
+            Start_btn.SetActive(false);
+        }
+    }
+
+    [PunRPC]
+    void RPC_StartGame()
+    {
+        isGameStarted = true;
     }
 }

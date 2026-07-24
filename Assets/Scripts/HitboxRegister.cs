@@ -19,18 +19,22 @@ public class HitboxRegister : MonoBehaviour
 
     // This runs when the hitbox (which must be a Trigger) overlaps another collider
     private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && other.gameObject != player /*|| other.gameObject.layer == gameObject.layer*/)
+    {   if (other != null)
         {
-            if (!objectsHitThisSwing.Contains(other.gameObject)) objectsHitThisSwing.Add(other.gameObject);
-
-            foreach (GameObject x in objectsHitThisSwing)
+            if (other.CompareTag("Player") && other.gameObject != player /*|| other.gameObject.layer == gameObject.layer*/)
             {
-                x.GetComponent<PlayerController>().TakeDamage(damageAmount);
-            }
+                if (!objectsHitThisSwing.Contains(other.gameObject)) objectsHitThisSwing.Add(other.gameObject);
 
-            Debug.Log("This Thang is Hit!");
+                foreach (GameObject x in objectsHitThisSwing)
+                {
+                    if (x == null) objectsHitThisSwing.Remove(x);
+                    x.GetComponent<PlayerController>().TakeDamage(damageAmount);
+                }
+
+                Debug.Log("This Thang is Hit!");
+            }
         }
+        
 
         //if (objectsHitThisSwing.Contains(other.gameObject))
         //{

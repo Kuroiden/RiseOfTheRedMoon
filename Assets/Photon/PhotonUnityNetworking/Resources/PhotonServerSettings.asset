@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: asia
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -45,6 +45,15 @@ MonoBehaviour:
   - SpawnNPC
   - checkPlayers
   - Die
+  - StartGame
+  - OnButtonStart
+  - RPC_StartGame
+  - _NPC_Attack
+  - EnemyDetection
+  - FindNearestEntity
+  - get_AllAllies
+  - get_AllPlayers
+  - SpawnPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1

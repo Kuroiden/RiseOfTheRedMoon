@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class _PhotonPlayerSpawner : MonoBehaviourPunCallbacks
 {
+    public TextMeshProUGUI PlayerIDUI;
+
     [Header("Player Settings")]
     public GameObject playerPrefab; // must be in Resources folder
     private int playerId;
@@ -40,6 +43,7 @@ public class _PhotonPlayerSpawner : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
+    [PunRPC]
     void SpawnPlayer()
     {
         if (playerPrefab == null)
@@ -63,43 +67,9 @@ public class _PhotonPlayerSpawner : MonoBehaviourPunCallbacks
 
         playerId = PhotonNetwork.LocalPlayer.ActorNumber;
         Debug.Log("playerID: " + playerId);
+        PlayerIDUI.text = playerId.ToString();
 
-        Transform spawnLocation = null;
-
-        switch (playerId)
-        {
-            case 1:
-                spawnLocation = spawnPoints[0];
-                break;
-
-            case 2:
-                spawnLocation = spawnPoints[1];
-                break;
-            
-            case 3:
-                spawnLocation = spawnPoints[2];
-                break;
-
-            case 4:
-                spawnLocation = spawnPoints[3];
-                break;
-
-            case 5:
-                spawnLocation = spawnPoints[4];
-                break;
-
-            case 6:
-                spawnLocation = spawnPoints[5];
-                break;
-
-            case 7:
-                spawnLocation = spawnPoints[6];
-                break;
-
-            case 8:
-                spawnLocation = spawnPoints[7];
-                break;
-        }
+        Transform spawnLocation = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1];
 
         // Instantiate over network
         GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnLocation.position, spawnLocation.rotation);

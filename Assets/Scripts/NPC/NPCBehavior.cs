@@ -143,6 +143,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         }
     }
 
+    [PunRPC]
     private void _NPC_Attack()
     {
         if (_Target != null)
@@ -198,10 +199,10 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
     {
         // The Master Client (or the owner of the object) should usually handle health reduction
         // to prevent cheating and conflicts.
-        /*if (!PhotonNetwork.IsMasterClient)
+        if (!PhotonNetwork.IsMasterClient)
         {
             return;
-        }*/
+        }
 
         npcCurrentHealth -= damage;
 
@@ -212,6 +213,8 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
             npcState = NPC_State.Dead;
         }
     }
+
+    [PunRPC]
     private void Die()
     {
         if (npcCurrentHealth == 0)
@@ -220,12 +223,12 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
 
             this.gameObject.SetActive(false);
 
-            /*
+            
             if (photonView.IsMine)
             {
                 PhotonNetwork.Destroy(gameObject);
             }
-            */
+            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -246,6 +249,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         }
     }
 
+    [PunRPC]
     // AI Behaviors
     private List<GameObject> get_AllPlayers()
     {
@@ -259,6 +263,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         return Players;
     }
 
+    [PunRPC]
     private List<GameObject> get_AllAllies()
     {
         Debug.Log("Searching for opposing players allies...");
@@ -275,12 +280,13 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         return Opponents;
     }
 
+    [PunRPC]
     private GameObject FindNearestEntity(List<GameObject> EntityList)
     {
         GameObject nearestEntity = null;
         float entityDist = 0f;
 
-        if (EntityList.Count > 0)
+        if (EntityList != null || EntityList.Count > 0)
         {
             for (int i = 0; i < EntityList.Count; i++)
             {
@@ -294,6 +300,7 @@ public class NPCBehavior : MonoBehaviourPunCallbacks, IPunObservable, Damageable
         return nearestEntity;
     }
 
+    [PunRPC]
     public void EnemyDetection()
     {
         Debug.Log("Searching for nearby enemy...");

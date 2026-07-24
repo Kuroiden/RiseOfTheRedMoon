@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     [Header("Game Objects")]
     CharacterController Player;
+    public Camera PlayerCam;
     [SerializeField] private GameObject PlayerObj;
     [SerializeField] private GameObject WolfObj;
     [SerializeField] private GameObject BloodNado;
@@ -26,8 +27,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private ParticleSystem slashVFX;
     [SerializeField] private ParticleSystem dashVFX;
     [SerializeField] private float attackVerticalOffset = -0.5f;
-    [SerializeField] private GameObject loseScreen;
-    [SerializeField] private GameObject winScreen;
     private bool winnerIsFound;
 
 
@@ -67,7 +66,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     Vector3 updatePos;
 
     [Header("Player Actions")]
-    public bool CanMove = true;
+    public bool CanMove = false;
     public bool isAttacking = false;
     public bool isDashing = false;
     private Vector3 lastFacingDirection = Vector3.forward;
@@ -75,7 +74,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     [Header("Photon PUN Variables")]
     private Vector3 net_Pos;
     private Quaternion net_Rot;
-    private PhotonView pv;
+    PhotonView pv;
 
     void Awake()
     {
@@ -96,10 +95,14 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         net_Rot = transform.rotation;
         winnerIsFound = false;
         pv = GetComponent<PhotonView>();
+
+        if (!pv.IsMine) PlayerCam.enabled = false;
     }
 
     void Update()
     {
+        if (GameManager.isGameStarted && !CanMove) CanMove = true;
+
         CheckIfWinner();
 
         if (pv.IsMine)
@@ -345,7 +348,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
         this.gameObject.SetActive(false);
 
-        if (pv.IsMine) loseScreen.SetActive(true);
+        if (pv.IsMine) gManager.LoseScreen.SetActive(true);
     }
 
     void CheckIfWinner()
@@ -363,7 +366,7 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if (pv.IsMine && gManager.isNighttime) winScreen.SetActive(true);
+            if (pv.IsMine && gManager.isNighttime) gManager.WinnerScreen.SetActive(true);
         }
 }
 

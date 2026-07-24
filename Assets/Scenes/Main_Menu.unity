@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.1}
+  m_SizeDelta: {x: 0, y: 2.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &12942912
 MonoBehaviour:
@@ -181,8 +181,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1212b16d4cf5dc04aabd98e4185b14f9, type: 2}
-  m_sharedMaterial: {fileID: -6610333460079977640, guid: 1212b16d4cf5dc04aabd98e4185b14f9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1c84f2dad49183e4b9a14194623be927, type: 2}
+  m_sharedMaterial: {fileID: -3769386965002886454, guid: 1c84f2dad49183e4b9a14194623be927, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13207549, g: 0.086939305, b: 0.08049128, a: 1}
+  m_Color: {r: 0.11698109, g: 0.09863382, b: 0.09601278, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2067,7 +2067,6 @@ GameObject:
   - component: {fileID: 1484473098}
   - component: {fileID: 1484473097}
   - component: {fileID: 1484473096}
-  - component: {fileID: 1484473099}
   m_Layer: 5
   m_Name: CreateRoom_bttn
   m_TagString: Untagged
@@ -2163,13 +2162,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 27868210}
+      - m_Target: {fileID: 27868212}
         m_TargetAssemblyTypeName: _PhotonLobby, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnConnectedToMaster
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2213,18 +2212,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484473094}
   m_CullTransparentMesh: 1
---- !u!114 &1484473099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484473094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2ae7f7bd726b64198909fbd49bc44f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1843359738
 GameObject:
   m_ObjectHideFlags: 0
