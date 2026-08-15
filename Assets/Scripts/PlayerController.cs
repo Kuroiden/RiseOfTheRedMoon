@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     CharacterController Player;
     public Camera PlayerCam;
     [SerializeField] private GameObject PlayerObj;
-    [SerializeField] private GameObject WolfObj;
     [SerializeField] private GameObject BloodNado;
     [SerializeField] private GameObject Claws;
     [SerializeField] private GameObject hitBox;
@@ -30,8 +29,8 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
     private bool winnerIsFound;
 
 
-    public Texture[] PlayerTexture; // This can be replaced with a Texture2DArray I think, I just don't know how to use it
-    public Texture[] WolfTexture;
+    public List<Texture> PlayerTexture; // This can be replaced with a Texture2DArray I think, I just don't know how to use it
+    public List<Texture> WolfTexture;
     public Sprite[] PlayerSprites;
     public Sprite[] WolfSprites;
 
@@ -67,9 +66,11 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     [Header("Player Actions")]
     public bool CanMove = false;
+    public bool atkTriggered = false;
     public bool isAttacking = false;
     public bool isDashing = false;
-    private Vector3 lastFacingDirection = Vector3.forward;
+    private Vector3 lastFacingDirection = -Vector3.forward;
+    private int matIndex = 2;
 
     [Header("Photon PUN Variables")]
     private Vector3 net_Pos;
@@ -101,6 +102,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        if (gManager != null)
+        {
+            if (gManager.isNighttime)
+            {
+                pState = Player_State.Werewolf;
+                BloodNado.SetActive(true);
+                Claws.SetActive(true);
+            }
+            else pState = Player_State.Human;
+        }
+        else
+        {
+            Debug.LogError("<color='tomato'>ERROR: Game Manager not found. The game is unable to start.</color>");
+            return;
+        }
+
         if (GameManager.isGameStarted && !CanMove) CanMove = true;
 
         CheckIfWinner();
@@ -117,8 +134,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
             Vector3 currentInputMovement = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
 
-            //updatePos = (moveForward * charDisplacementX) + (moveRight * charDisplacementZ);
-
             if (isRunning && currentInputMovement.magnitude > 0.1f)
             {
                 if (playerCurrentStamina > 0)
@@ -129,7 +144,6 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
 
                 if (playerCurrentStamina <= 0)
                 {
-                    // Force running speed down to walk speed.
                     charDisplacementX = CanMove ? walkSpd * Input.GetAxis("Vertical") : 0;
                     charDisplacementZ = CanMove ? walkSpd * Input.GetAxis("Horizontal") : 0;
                 }
@@ -145,74 +159,65 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             // Keeps player grounded
             if (!Player.isGrounded) updatePos.y -= gravity * 100f * Time.deltaTime;
 
-            if (CanMove && !isDashing)
-            {
-                    Player.Move(updatePos * Time.deltaTime);
-            }
+            if (CanMove && !isDashing) Player.Move(updatePos * Time.deltaTime);
+
+            Material playerMat = PlayerObj.GetComponent<Renderer>().material;
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                // Update texture (already present)
-                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[0] : WolfTexture[0];
-            
-                lastFacingDirection = transform.forward;
+                matIndex = 0;
+                lastFacingDirection = Vector3.forward;
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             {
-                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[1] : WolfTexture[1];
-                lastFacingDirection = -transform.right;
+                matIndex = 1;
+                lastFacingDirection = -Vector3.right;
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[2] : WolfTexture[2];
-                lastFacingDirection = -transform.forward; 
+                matIndex = 2;
+                lastFacingDirection = -Vector3.forward; 
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
             {
-                PlayerObj.GetComponent<Renderer>().material.mainTexture = (pState == Player_State.Human) ? PlayerTexture[3] : WolfTexture[3];
-                lastFacingDirection = transform.right;
+                matIndex = 3;
+                lastFacingDirection = Vector3.right;
             }
-        
-            if (gManager != null)
-            {
-                if (gManager.isNighttime)
-                {
-                    pState = Player_State.Werewolf;
-                    BloodNado.SetActive(true);
-                    Claws.SetActive(true);
-                }
-                else
-                {
-                    pState = Player_State.Human;
-                }
-            }
-            if(Input.GetMouseButtonDown(0) && CanMove)
-            {
-                Attack();
-            }
-            if (Input.GetKeyDown(KeyCode.LeftControl) && CanMove)
-            {
-                Dash();
-            }
-        }
-        else
-        {
-            transform.position = Vector3.Lerp(transform.position, net_Pos, Time.deltaTime * 10f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, net_Rot, Time.deltaTime);
-        }
 
+            playerMat.mainTexture = (pState == Player_State.Human) ? PlayerTexture[matIndex] : WolfTexture[matIndex];
+            if (Input.GetMouseButtonDown(0) && CanMove) Attack();
+            if (Input.GetKeyDown(KeyCode.LeftControl) && CanMove) Dash();
+        }
+        else updatePlayerAction();
+    }
+
+    void updatePlayerAction()
+    {
+        Material playerMat = PlayerObj.GetComponent<Renderer>().material;
+
+        if (lastFacingDirection == Vector3.forward) matIndex = 0;
+        else if (lastFacingDirection == -Vector3.forward) matIndex = 2;
+        else if (lastFacingDirection == -Vector3.right) matIndex = 1;
+        else if (lastFacingDirection == Vector3.right) matIndex = 3;
+
+        if (pState == Player_State.Werewolf && !WolfTexture.Contains(playerMat.mainTexture))
+            playerMat.mainTexture = WolfTexture[matIndex];
+
+        playerMat.mainTexture = (pState == Player_State.Human) ? PlayerTexture[matIndex] : WolfTexture[matIndex];
+
+        if (atkTriggered) Attack();
     }
 
     void Attack()
     {
-        if(pState == Player_State.Werewolf)
+        if (pState == Player_State.Werewolf)
         {
             if (!isAttacking && !isDashing)
             {
-               StartCoroutine(AttackSequence());
+                atkTriggered = true;
+                StartCoroutine(AttackSequence());
             }
         }
-
     }
 
     void Dash()
@@ -227,17 +232,15 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
                     StartCoroutine(DashSequence());
                 }
             }
-            else
-            {
-                Debug.Log("Not enough stamina to Dash!");
-            }
+            else Debug.Log("Not enough stamina to Dash!");
         }
     }
 
     private IEnumerator AttackSequence()
     {
         isAttacking = true;
-        
+        atkTriggered = false;
+
         float attackDuration = 0.2f;
         float attackDistance = 0.3f;
 
@@ -255,30 +258,22 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
             Quaternion directionRotation = Quaternion.LookRotation(lastFacingDirection, Vector3.up);
             finalRotation = directionRotation * rotationOffset;
         }
-        else
-        {
-            finalRotation = transform.rotation * rotationOffset;
-        }
+        else finalRotation = transform.rotation * rotationOffset;
 
         hitBox.transform.rotation = finalRotation;
 
-        if (hitboxController != null)
-        {
-            hitboxController.Initialize(dmg);
-        }
+        if (hitboxController != null && pv.IsMine) hitboxController.Initialize(dmg);
 
         hitBox.SetActive(true);
 
         if (slashVFX != null)
         {
-          
             slashVFX.transform.position = hitBox.transform.position;
             slashVFX.transform.rotation = hitBox.transform.rotation;
             slashVFX.Play();
         }
 
         yield return new WaitForSeconds(attackDuration);
-
 
         hitBox.SetActive(false);
         isAttacking = false;
@@ -376,17 +371,21 @@ public class PlayerController : MonoBehaviourPunCallbacks, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+            stream.SendNext(lastFacingDirection);
             stream.SendNext(pState);
             stream.SendNext(playerCurrentHealth);
             stream.SendNext(playerCurrentStamina);
+            stream.SendNext(atkTriggered);
         }
         else
         {
             net_Pos = (Vector3)stream.ReceiveNext();
             net_Rot = (Quaternion)stream.ReceiveNext();
+            lastFacingDirection = (Vector3)stream.ReceiveNext();
             pState = (Player_State)stream.ReceiveNext();
             playerCurrentHealth = (float)stream.ReceiveNext();
             playerCurrentStamina = (float)stream.ReceiveNext();
+            atkTriggered = (bool)stream.ReceiveNext();
         }
     }
 }

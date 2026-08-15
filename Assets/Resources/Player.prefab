@@ -10603,7 +10603,6 @@ MonoBehaviour:
   gManager: {fileID: 0}
   PlayerCam: {fileID: 5566377891263906834}
   PlayerObj: {fileID: 4132033041545283593}
-  WolfObj: {fileID: 3514001236033509424}
   BloodNado: {fileID: 2795750442336207454}
   Claws: {fileID: 4643951822340406762}
   hitBox: {fileID: 8809655034909557316}
@@ -10638,6 +10637,7 @@ MonoBehaviour:
   runCost: 5
   staminaRegenRate: 3.5
   CanMove: 0
+  atkTriggered: 0
   isAttacking: 0
   isDashing: 0
 --- !u!136 &5972990142511560012
